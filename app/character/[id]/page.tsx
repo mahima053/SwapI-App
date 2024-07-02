@@ -2,7 +2,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Box, Text, List, ListItem, Image, Flex } from "@chakra-ui/react";
-import { getCharacterImage } from "@/app/page";
 
 interface CharacterDetail {
   name: string;
@@ -45,6 +44,11 @@ const CharacterDetail = ({ params }: { params: { id: string } }) => {
     };
     fetchCharacter();
   }, [id]);
+
+  const getCharacterImage = (character: CharacterDetail) => {
+    const id = character.url.split("/")[5];
+    return `/img/people/${id}.jpg`;
+  };
 
   if (!character) return <Box>Loading...</Box>;
 

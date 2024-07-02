@@ -21,11 +21,6 @@ interface Character {
   url: string;
 }
 
-export const getCharacterImage = (character: Character) => {
-  const id = character.url.split("/")[5];
-  return `/img/people/${id}.jpg`;
-};
-
 const Home = () => {
   const [characters, setCharacters] = useState<Character[]>([]);
   const [page, setPage] = useState(1);
@@ -74,7 +69,10 @@ const Home = () => {
     data.name.toLocaleLowerCase().includes(searchString.toLocaleLowerCase())
   );
 
- 
+  const getCharacterImage = (character: Character) => {
+    const id = character.url.split("/")[5];
+    return `/img/people/${id}.jpg`;
+  };
 
   return (
     <Box p={4} bgColor="black">
@@ -108,10 +106,7 @@ const Home = () => {
             bgColor={"#2b3037"}
           >
             <Link href={`/character/${character.url.split("/")[5]}`}>
-              <Image
-                src={getCharacterImage(character)}
-                alt={character.name}
-              />
+              <Image src={getCharacterImage(character)} alt={character.name} />
               <Text mt={2} fontWeight="bold" color={"orange"}>
                 {character.name}
               </Text>
