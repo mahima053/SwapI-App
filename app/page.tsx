@@ -14,6 +14,7 @@ import {
   Input,
   InputLeftElement,
   Spinner,
+  IconButton,
 } from "@chakra-ui/react";
 import { SearchIcon, StarIcon } from "@chakra-ui/icons";
 import { getCharacterImage } from "./utils";
@@ -81,20 +82,30 @@ const Home = () => {
         <Box w={{ base: "40%", md: "10%" }}>
           <Image src="/star-wars1.svg" alt="Starwars Logo" w="100%" h="auto" />
         </Box>
-        <InputGroup w={{ base: "200px", md: "264px" }} bgColor={"black"}>
-          <InputLeftElement>
-            <SearchIcon color="white" />
-          </InputLeftElement>
-          <Input
-            placeholder="Search"
-            bgColor="black"
-            h="40px"
-            fontSize="16px"
-            value={searchString}
-            onChange={(event) => onHandleChange(event)}
-            color="white"
-          />
-        </InputGroup>
+        <Flex alignItems="center" gap="5px">
+          <InputGroup w={{ base: "200px", md: "264px" }} bgColor={"black"}>
+            <InputLeftElement>
+              <SearchIcon color="white" />
+            </InputLeftElement>
+            <Input
+              placeholder="Search"
+              bgColor="black"
+              h="40px"
+              fontSize="16px"
+              value={searchString}
+              onChange={(event) => onHandleChange(event)}
+              color="white"
+            />
+          </InputGroup>
+          <Link href="/favorites">
+            <IconButton
+              aria-label="Favorites"
+              icon={<StarIcon color="orange" />}
+              color="white"
+              bgColor="white"
+            />
+          </Link>
+        </Flex>
       </Flex>
       {loading ? (
         <Flex justifyContent="center" alignItems="center" height="50vh">
