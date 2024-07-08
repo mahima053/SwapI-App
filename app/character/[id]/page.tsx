@@ -35,23 +35,18 @@ const CharacterDetail = ({ params }: { params: { id: string } }) => {
         const filmRequests = response.data.films.map((url: string) =>
           axios.get(url)
         );
-        console.log(response, "response");
-        console.log(filmRequests, "filmRequestsresponse");
-
         const filmResponses = await Promise.all(filmRequests);
         setFilms(filmResponses.map((res) => res.data));
-        console.log(filmResponses, "filmResponsesresponse");
       }
     };
     fetchCharacter();
   }, [id]);
 
-
   if (!character) return <Box>Loading...</Box>;
 
   return (
     <Flex
-      p={10}
+      p={4}
       bg="black"
       alignItems="center"
       justifyContent={"center"}
@@ -59,44 +54,102 @@ const CharacterDetail = ({ params }: { params: { id: string } }) => {
       gap="20px"
     >
       <Box>
-        <Image src="/star-wars1.svg" alt="Starwars Logo" w="100px" h="100px" />
+        <Image
+          src="/star-wars1.svg"
+          alt="Starwars Logo"
+          w={{ base: "80px", md: "100px" }}
+          h={{ base: "80px", md: "100px" }}
+        />
       </Box>
-      <Flex bg="white">
+      <Flex
+        bg="white"
+        w={{ base: "90%", md: "80%", lg: "60%" }}
+        flexDirection={{ base: "column", md: "row" }}
+        alignItems={{ base: "center", md: "flex-start" }}
+      >
         <Image
           src={getCharacterImage(character)}
           alt={character.name}
-          w="40%"
-          h="40%"
+          w={{ base: "80%", md: "40%" }}
+          h="auto"
+          objectFit="cover"
         />
-        <Box pl="40px" pt="20px">
-          <Text fontSize="20px" fontWeight="bold">
+        <Box
+          pl={{ base: "0", md: "40px" }}
+          pt={{ base: "20px", md: "20px" }}
+          w={{ base: "100%", md: "60%" }}
+          textAlign={{ base: "center", md: "left" }}
+        >
+          <Text fontSize={{ base: "18px", md: "20px" }} fontWeight="bold">
             {character.name}
           </Text>
-          <Flex alignItems={"center"} alignContent={"center"} mt={2} gap="5px">
+          <Flex
+            alignItems={"center"}
+            alignContent={"center"}
+            mt={2}
+            gap="5px"
+            flexDirection={{ base: "column", md: "row" }}
+          >
             <Text fontWeight={"400px"}>Height:</Text>
             <Text color="gray">{character.height}</Text>
           </Flex>
-          <Flex alignItems={"center"} alignContent={"center"} mt={2} gap="5px">
+          <Flex
+            alignItems={"center"}
+            alignContent={"center"}
+            mt={2}
+            gap="5px"
+            flexDirection={{ base: "column", md: "row" }}
+          >
             <Text fontWeight={"400px"}>Mass:</Text>
             <Text color="gray">{character.mass}</Text>
           </Flex>
-          <Flex alignItems={"center"} alignContent={"center"} mt={2} gap="5px">
+          <Flex
+            alignItems={"center"}
+            alignContent={"center"}
+            mt={2}
+            gap="5px"
+            flexDirection={{ base: "column", md: "row" }}
+          >
             <Text fontWeight={"400px"}>Hair Color:</Text>
             <Text color="gray">{character.hair_color}</Text>
           </Flex>
-          <Flex alignItems={"center"} alignContent={"center"} mt={2} gap="5px">
+          <Flex
+            alignItems={"center"}
+            alignContent={"center"}
+            mt={2}
+            gap="5px"
+            flexDirection={{ base: "column", md: "row" }}
+          >
             <Text fontWeight={"400px"}>Skin Color:</Text>
             <Text color="gray">{character.skin_color}</Text>
           </Flex>
-          <Flex alignItems={"center"} alignContent={"center"} mt={2} gap="5px">
+          <Flex
+            alignItems={"center"}
+            alignContent={"center"}
+            mt={2}
+            gap="5px"
+            flexDirection={{ base: "column", md: "row" }}
+          >
             <Text fontWeight={"400px"}>Eye Color:</Text>
             <Text color="gray">{character.eye_color}</Text>
           </Flex>
-          <Flex alignItems={"center"} alignContent={"center"} mt={2} gap="5px">
+          <Flex
+            alignItems={"center"}
+            alignContent={"center"}
+            mt={2}
+            gap="5px"
+            flexDirection={{ base: "column", md: "row" }}
+          >
             <Text fontWeight={"400px"}>Birth Year:</Text>
             <Text color="gray">{character.birth_year}</Text>
           </Flex>
-          <Flex alignItems={"center"} alignContent={"center"} mt={2} gap="5px">
+          <Flex
+            alignItems={"center"}
+            alignContent={"center"}
+            mt={2}
+            gap="5px"
+            flexDirection={{ base: "column", md: "row" }}
+          >
             <Text fontWeight={"400px"}>Gender:</Text>
             <Text color="gray">{character.gender}</Text>
           </Flex>
@@ -106,7 +159,7 @@ const CharacterDetail = ({ params }: { params: { id: string } }) => {
       <Box
         bgColor="gray.700"
         p="20px"
-        w="30%"
+        w={{ base: "90%", md: "70%", lg: "30%" }}
         borderRadius="12px"
         boxShadow="md"
       >
@@ -127,6 +180,7 @@ const CharacterDetail = ({ params }: { params: { id: string } }) => {
               borderRadius="8px"
               bgColor="gray.600"
               _hover={{ bgColor: "gray.500" }}
+              textAlign="center"
             >
               {film.title}
             </ListItem>

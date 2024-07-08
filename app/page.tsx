@@ -76,12 +76,12 @@ const Home = () => {
 
   return (
     <Box p={4} bgColor="black">
-      <Flex alignItems="center" justifyContent="space-between">
+      <Flex alignItems="center" justifyContent="space-between" gap="2px">
         <Box borderRadius="50%" />
-        <Box w="60%">
-          <Image src="/star-wars1.svg" alt="Starwars Logo" w="10%" h="10%" />
+        <Box w={{ base: "40%", md: "10%" }}>
+          <Image src="/star-wars1.svg" alt="Starwars Logo" w="100%" h="auto" />
         </Box>
-        <InputGroup w="264px" bgColor={"black"}>
+        <InputGroup w={{ base: "200px", md: "264px" }} bgColor={"black"}>
           <InputLeftElement>
             <SearchIcon color="white" />
           </InputLeftElement>
@@ -92,6 +92,7 @@ const Home = () => {
             fontSize="16px"
             value={searchString}
             onChange={(event) => onHandleChange(event)}
+            color="white"
           />
         </InputGroup>
       </Flex>
@@ -101,7 +102,15 @@ const Home = () => {
         </Flex>
       ) : (
         <>
-          <Grid templateColumns="repeat(5, 1fr)" gap={6}>
+          <Grid
+            templateColumns={{
+              base: "repeat(2, 1fr)",
+              sm: "repeat(3, 1fr)",
+              md: "repeat(4, 1fr)",
+              lg: "repeat(5, 1fr)",
+            }}
+            gap={6}
+          >
             {filteredResult.map((character) => (
               <Box
                 key={character.name}
@@ -115,19 +124,33 @@ const Home = () => {
                   <Image
                     src={getCharacterImage(character)}
                     alt={character.name}
+                    w="100%"
                   />
-                  <Text mt={2} fontWeight="bold" color={"orange"}>
+                  <Text
+                    mt={2}
+                    fontWeight="bold"
+                    color={"orange"}
+                    w="100%"
+                    whiteSpace="nowrap"
+                    overflow="hidden"
+                    textOverflow="ellipsis"
+                  >
                     {character.name}
                   </Text>
                 </Link>
-                <Flex gap="5px">
+                <Flex
+                  gap="2px"
+                  alignItems="center"
+                  justifyContent="center"
+                  mt={2}
+                >
                   <Button
                     onClick={() => toggleFavorite(character)}
-                    mt={2}
-                    gap="10px"
+                    fontSize={{ base: "10px", md: "14px", sm: "10px" }}
+                    width="100%"
                   >
                     {favorites.includes(character.name)
-                      ? "Remove from Favorites"
+                      ? "Remove from Favorite"
                       : "Add to Favorites"}
                     <StarIcon
                       color={
